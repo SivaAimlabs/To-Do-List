@@ -9,6 +9,7 @@ function deleteli(TaskNumber) {
 
 function showEditOptions(TaskNumber) {
     var TaskName = $("#" + TaskNumber + " .task").html()
+    
     $("#" + TaskNumber + "").html("<input id='txtupdate_TaskName' value='" + TaskName + "'/>"+
         "<button onclick = updateli('" + TaskNumber + "') > Update </button>" +
         "<button onclick = cancelupdate('" + TaskNumber + "') > Cancel </button>" +
@@ -21,11 +22,12 @@ function updateli(TaskNumber) {
     var btndeleteId = "btndelete" + TaskNumber;
 
     var x = $("#txtupdate_TaskName").val()
-
-    $("#myTasks").html("<li id = '" + TaskNumber + "' class = 'liItem' prevTask = '"+ x +"'>" +"<div class= 'task'>"+ x +"</div>"+
+    
+    $("#myTasks").append("<li id = '" + TaskNumber + "' class = 'liItem' prevTask = '"+ x +"'>" +"<div class= 'task'>"+ x +"</div>"+
     "<button id='" + btndeleteId + "' onclick =deleteli('" + TaskNumber + "')> Delete </button>" +
     "<button id='" + btneditId + "' onclick=showEditOptions('" + TaskNumber + "')>Edit</button>" +
     "</li>");
+    deleteli(TaskNumber)
 }
 
 
@@ -35,10 +37,11 @@ function cancelupdate(TaskNumber) {
 
     var x = $( "#" + TaskNumber + "").attr( "prevTask" )
 
-    $("#myTasks").html("<li id = '" + TaskNumber + "' class = 'liItem' prevTask = '"+ x +"'>" +"<div class= 'task'>"+ x +"</div>"+
+    $("#myTasks").append("<li id = '" + TaskNumber + "' class = 'liItem' prevTask = '"+ x +"'>" +"<div class= 'task'>"+ x +"</div>"+
                 "<button id='" + btndeleteId + "' onclick =deleteli('" + TaskNumber + "')> Delete </button>" +
                 "<button id='" + btneditId + "' onclick=showEditOptions('" + TaskNumber + "')>Edit</button>" +
                 "</li>");
+    deleteli(TaskNumber)
 
 }
 
