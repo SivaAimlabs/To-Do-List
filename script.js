@@ -8,7 +8,6 @@ function deleteli(TaskNumber) {
 }
 
 function showEditOptions(TaskNumber) {
-    console.log("show edit options")
     var TaskName = $("#" + TaskNumber + " .task").html()
     $("#" + TaskNumber + "").html("<input id='txtupdate_TaskName' value='" + TaskName + "'/>"+
         "<button onclick = updateli('" + TaskNumber + "') > Update </button>" +
@@ -23,11 +22,26 @@ function updateli(TaskNumber) {
 
     var x = $("#txtupdate_TaskName").val()
 
-    $("#myTasks").html("<li id = '" + TaskNumber + "' class = 'liItem'>" +"<div class= 'task'>"+ x +"</div>"+
+    $("#myTasks").html("<li id = '" + TaskNumber + "' class = 'liItem' prevTask = '"+ x +"'>" +"<div class= 'task'>"+ x +"</div>"+
     "<button id='" + btndeleteId + "' onclick =deleteli('" + TaskNumber + "')> Delete </button>" +
     "<button id='" + btneditId + "' onclick=showEditOptions('" + TaskNumber + "')>Edit</button>" +
     "</li>");
 }
+
+
+function cancelupdate(TaskNumber) {
+    var btneditId = "btnedit" + TaskNumber;
+    var btndeleteId = "btndelete" + TaskNumber;
+
+    var x = $( "#" + TaskNumber + "").attr( "prevTask" )
+
+    $("#myTasks").html("<li id = '" + TaskNumber + "' class = 'liItem' prevTask = '"+ x +"'>" +"<div class= 'task'>"+ x +"</div>"+
+                "<button id='" + btndeleteId + "' onclick =deleteli('" + TaskNumber + "')> Delete </button>" +
+                "<button id='" + btneditId + "' onclick=showEditOptions('" + TaskNumber + "')>Edit</button>" +
+                "</li>");
+
+}
+
 
 $(document).ready(function () {
     $("#btn").click(function () {
@@ -36,7 +50,7 @@ $(document).ready(function () {
             var TaskNumber = CreateUniqueID();
             var btneditId = "btnedit" + TaskNumber;
             var btndeleteId = "btndelete" + TaskNumber;
-            $("#myTasks").append("<li id = '" + TaskNumber + "' class = 'liItem'>" +"<div class= 'task'>"+ x +"</div>"+
+            $("#myTasks").append("<li id = '" + TaskNumber + "' class = 'liItem' prevTask = '"+ x +"'>" +"<div class= 'task'>"+ x +"</div>"+
                 "<button id='" + btndeleteId + "' onclick =deleteli('" + TaskNumber + "')> Delete </button>" +
                 "<button id='" + btneditId + "' onclick=showEditOptions('" + TaskNumber + "')>Edit</button>" +
                 "</li>");
